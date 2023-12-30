@@ -1,14 +1,20 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { nanoid } from 'nanoid';
 
-const contactsInitialState = [];
+interface Contact {
+  id: string;
+  name: string;
+  number: string;
+}
+
+const contactsInitialState: Contact[] | [] = [] as Contact[];
 
 const contactsSlice = createSlice({
   name: 'contacts',
   initialState: contactsInitialState,
   reducers: {
     addContact: {
-      reducer(state, action) {
+      reducer(state, action: PayloadAction<Contact>) {
         state.unshift(action.payload);
       },
       prepare(name, number) {
